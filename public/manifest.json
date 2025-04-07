@@ -3,12 +3,12 @@
   "name": "TwinNU",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "favicon-twinnu.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "favicon-96x96.png",
+      "src": "favicon-twinnu-96x96.png",
       "type": "image/png",
       "sizes": "96x96"
     },
