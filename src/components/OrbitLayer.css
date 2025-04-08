@@ -1,0 +1,24 @@
+.orbit-layer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
+  transform: translate(-50%, -50%);
+  z-index: 55;
+}
+
+.avatar-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.orbit-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  transform: rotate(0deg);
+}

@@ -1,0 +1,62 @@
+.logo-text-only {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease, z-index 0.2s ease;
+}
+
+.logo-text-only.hovered {
+  transform: translate(-50%, -50%) scale(1.15);
+  z-index: 100;
+}
+
+
+.logo-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 36px;
+  background: linear-gradient(120deg, #c8f4ff, #dbffe6 30%, #ebd4ff);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulseGradient 6s ease-in-out infinite;
+  letter-spacing: 1.5px;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.logo-text.hovered {
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.5),
+    0 0 14px rgba(255, 255, 255, 0.3),
+    0 0 22px rgba(255, 255, 255, 0.2);
+}
+
+.logo-thin {
+  font-weight: 300;
+}
+
+.logo-bold {
+  font-weight: 700;
+}
+
+@keyframes pulseGradient {
+  0% {
+    background-position: 0% 50%;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    background-position: 100% 50%;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    background-position: 0% 50%;
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+  }
+}

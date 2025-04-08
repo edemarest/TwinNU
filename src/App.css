@@ -1,38 +1,96 @@
 .App {
-  text-align: center;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
+.App::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #a6c9ee, #c2fbe4 30%, #d4c2fb);
+
+  background-size: 200% 200%;
+  animation: gradientShift 20s ease-in-out infinite;
+  opacity: 0.5;
+  z-index: 1;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.black-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+}
+
+.top-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 25%;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent);
+  z-index: 60;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  pointer-events: none;
 }
 
-.App-link {
-  color: #61dafb;
+.coming-soon-text {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: lowercase;
+  background: linear-gradient(120deg, #a7eed9, #dbffe6 30%, #ebd4ff);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulseGradient 6s ease-in-out infinite;
+  opacity: 1;
+  z-index: 61;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes pulseGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
+
+.interactive-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 70; 
+  opacity: 0.3;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.interactive-center:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  opacity: 1;
+}
+
+
+

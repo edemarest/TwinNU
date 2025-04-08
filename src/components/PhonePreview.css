@@ -1,0 +1,31 @@
+.phone-preview-wrapper {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 40;
+}
+
+.phone {
+  position: absolute;
+  max-height: 80vh;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.phone-back {
+  bottom: 0;
+  left: auto;
+  right: 5px;
+  transform: translateX(-20%) translateY(3%);
+  z-index: 1;
+  opacity: 0.4;
+}
+
+.phone-front {
+  bottom: 0;
+  right: 0px;
+  z-index: 2;
+}
