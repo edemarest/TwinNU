@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import LogoCircle from './components/LogoCircle';
 import OrbitLayer from './components/OrbitLayer';
-import PhonePreview from './components/PhonePreview';
 
 const avatars = [
   '/images/conor.png',
