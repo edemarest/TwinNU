@@ -17,7 +17,6 @@ function App() {
 
   return (
     <div className="App">
-      { /* <PhonePreview /> */}
 
       <div
         className="interactive-center"
