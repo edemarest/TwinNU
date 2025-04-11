@@ -113,6 +113,7 @@
   }
   
   .submit-wrapper button {
+    margin-top: 10px;
     padding: 12px 28px;
     border-radius: 999px;
     font-family: 'Orbitron', sans-serif;
@@ -157,4 +158,45 @@
   .hidden {
     display: none;
   }
+
+  /* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .modal-container {
+    padding: 24px 16px;
+    max-width: 92%;
+    margin: 0 4%;
+    border-radius: 10px;
+  }
+
+  .modal-title {
+    font-size: 22px;
+  }
+
+  .modal-caption {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .waitlist-form label {
+    font-size: 15px;
+  }
+
+  .waitlist-form input,
+  .waitlist-form textarea {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .submit-wrapper button {
+    font-size: 14px;
+    padding: 10px 24px;
+  }
+
+  .close-button {
+    top: 12px;
+    right: 14px;
+    font-size: 22px;
+  }
+}
+
   
