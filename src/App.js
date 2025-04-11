@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import LogoCircle from './components/LogoCircle';
 import OrbitLayer from './components/OrbitLayer';
+import WaitlistModal from './components/WaitlistModal';
 
 const avatars = [
   '/images/conor.png',
@@ -13,6 +14,7 @@ const avatars = [
 
 function App() {
   const [hovered, setHovered] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <div className="App">
@@ -39,8 +41,18 @@ function App() {
 
       <div className="black-overlay" />
       <div className="top-gradient">
-        <h1 className="coming-soon-text">Coming Soon...</h1>
+        <div className="top-gradient">
+          <div className="top-ui">
+            <h1 className="coming-soon-text">coming soon to the app store...</h1>
+            <button className="waitlist-button" onClick={() => setModalOpen(true)}>
+              Join Waitlist
+            </button>
+          </div>
+        </div>
+
       </div>
+
+      {modalOpen && <WaitlistModal onClose={() => setModalOpen(false)} />}
     </div>
   );
 }
