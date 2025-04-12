@@ -6,7 +6,6 @@ const WaitlistModal = ({ onClose }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Wait for mount to apply the visible class (triggers animation)
     setTimeout(() => setVisible(true), 10);
   }, []);
 
@@ -35,12 +34,12 @@ const WaitlistModal = ({ onClose }) => {
         {submitted ? (
           <div className="success-message">
             <h2 className="modal-title gradient-text">You're on the list!</h2>
-            <p className="modal-caption">Thanks for your interest in TwinNU. We’ll reach out soon.</p>
+            <p className="modal-caption">We’ll keep you in the loop about the Twiniverse ✨</p>
           </div>
         ) : (
           <>
             <h2 className="modal-title gradient-text">Join the TwinNU Waitlist</h2>
-            <p className="modal-caption">Join the Twiniverse and let your twin do the networking for you.</p>
+            <p className="modal-caption">Curious about the Twiniverse?<br />Share your email and we’ll keep you in the loop.</p>
 
             <form
               className="waitlist-form"
@@ -56,23 +55,28 @@ const WaitlistModal = ({ onClose }) => {
               </p>
 
               <div>
-                <label htmlFor="name">Name</label>
-                <input id="name" type="text" name="name" placeholder="Name" required />
+                <label htmlFor="email">Email (required)</label>
+                <input id="email" type="email" name="email" placeholder="your@email.com" required />
               </div>
 
               <div>
-                <label htmlFor="email">Email</label>
-                <input id="email" type="email" name="email" placeholder="Email" required />
+                <label htmlFor="affiliation">Your affiliations (e.g. major, grad year, groups)</label>
+                <input id="affiliation" type="text" name="affiliation" placeholder="Affiliation (optional)" />
               </div>
 
               <div>
-                <label htmlFor="affiliation">Affiliation</label>
-                <input id="affiliation" type="text" name="affiliation" placeholder="Affiliation" required />
+                <label htmlFor="interests">People, places, or events you’d like to encounter?</label>
+                <textarea id="interests" name="interests" rows="3" placeholder="Let us know what excites you..." />
               </div>
 
               <div>
-                <label htmlFor="interest">Why are you interested?</label>
-                <textarea id="interest" name="interest" placeholder="Why are you interested?" rows="4" required />
+                <label htmlFor="comments">Any thoughts or comments?</label>
+                <textarea id="comments" name="comments" rows="3" placeholder="Optional message..." />
+              </div>
+
+              <div>
+                <label htmlFor="name">Your name</label>
+                <input id="name" type="text" name="name" placeholder="Name (optional)" />
               </div>
 
               <div className="submit-wrapper">
