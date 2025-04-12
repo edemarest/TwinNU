@@ -82,6 +82,16 @@
   margin-bottom: 1rem;
 }
 
+.waitlist-form .optional-divider {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 2rem 0;
+  padding: 0;
+}
+
 .waitlist-form label {
   font-family: 'Rajdhani', sans-serif;
   font-weight: 500;
@@ -157,9 +167,39 @@
   font-weight: 500;
 }
 
+.optional-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.optional-divider hr {
+  flex: 1;
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ccc, transparent);
+  opacity: 0.5;
+}
+
+.optional-label {
+  padding: 0 12px;
+  font-weight: 600;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  color: #eee;
+  background: #111;
+  z-index: 1;
+}
+
+
 .hidden {
   display: none;
 }
+
+
 
 @keyframes pulseGradient {
   0% { background-position: 0% 50%; }

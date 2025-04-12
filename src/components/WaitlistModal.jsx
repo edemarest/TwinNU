@@ -58,10 +58,14 @@ const WaitlistModal = ({ onClose }) => {
                 <label htmlFor="email">Email (required)</label>
                 <input id="email" type="email" name="email" placeholder="your@email.com" required />
               </div>
-
+              <div className="optional-divider">
+                <hr />
+                <span className="optional-label">Optional</span>
+                <hr />
+              </div>
               <div>
                 <label htmlFor="affiliation">Your affiliations (e.g. major, grad year, groups)</label>
-                <input id="affiliation" type="text" name="affiliation" placeholder="Affiliation (optional)" />
+                <input id="affiliation" type="text" name="affiliation" placeholder="Affiliation" />
               </div>
 
               <div>
@@ -71,12 +75,12 @@ const WaitlistModal = ({ onClose }) => {
 
               <div>
                 <label htmlFor="comments">Any thoughts or comments?</label>
-                <textarea id="comments" name="comments" rows="3" placeholder="Optional message..." />
+                <textarea id="comments" name="comments" rows="3" placeholder="Message or note" />
               </div>
 
               <div>
                 <label htmlFor="name">Your name</label>
-                <input id="name" type="text" name="name" placeholder="Name (optional)" />
+                <input id="name" type="text" name="name" placeholder="Name" />
               </div>
 
               <div className="submit-wrapper">
