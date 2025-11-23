@@ -56,7 +56,7 @@ export function SiteHeader() {
                 duration={350}
                 offset={NAV_OFFSET}
                 onSetActive={() => setActive(anchor.id)}
-                className={`relative overflow-hidden rounded-full px-4 py-2 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 dark:focus-visible:ring-white/60 ${
+                className={`nav-link relative z-0 overflow-hidden rounded-full px-4 py-2 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/50 dark:focus-visible:ring-white/60 ${
                   active === anchor.id
                     ? "text-foreground"
                     : "text-muted hover:text-foreground"
@@ -65,7 +65,7 @@ export function SiteHeader() {
                 {active === anchor.id ? (
                   <motion.span
                     layoutId="nav-active-pill"
-                    className="absolute inset-0 rounded-full border border-black/5 bg-white shadow-[0_8px_20px_rgba(15,23,42,0.15)] dark:border-white/20 dark:bg-white/10"
+                    className="absolute inset-0 z-[1] rounded-full border border-black/5 bg-white shadow-[0_8px_20px_rgba(15,23,42,0.15)] dark:border-white/20 dark:bg-white/10"
                     transition={{ duration: 0.18, ease: "easeOut" }}
                   />
                 ) : null}

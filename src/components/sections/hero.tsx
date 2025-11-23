@@ -122,7 +122,7 @@ export function HeroSection() {
             }}
           >
             <Button
-              onClick={() => scrollTo("contact")}
+              onClick={() => scrollTo("waitlist")}
               className="text-[#05070e] shadow-[0_10px_22px_rgba(0,0,0,0.18)] hover:bg-white hover:shadow-[0_14px_28px_rgba(0,0,0,0.22)] dark:text-[#05070e]"
             >
               <span className="flex items-center gap-2">
