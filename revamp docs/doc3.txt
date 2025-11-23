@@ -1,0 +1,59 @@
+TwinNU Website Structure, Layout, & Aesthetic Guide (Flexible Guideline)
+
+This document provides a high-level overview of the single-page application's structure, layout principles, and the key aesthetic elements that define the "clean, minimalist, but using neat gimmicks" vision. It serves as a flexible guideline for final layout decisions.-----I. Overall Page Structure & Flow
+
+The website is a single-page application (page.tsx in the /app root) with fixed navigation anchors to ensure smooth, rapid scrolling to key information.
+Section
+Content Focus
+Key Components / Visuals
+Hero
+Core Messaging (H1 & Sub-Headline) & Primary CTA.
+Animated Background (Galaxy Tile, Pulsing Orbits), Primary CTA Button.
+Problem
+The Pain Points ("Missing Middle," "Connection Fatigue").
+Standard text content, separated by a thin, subtle divider line.
+Solution & Features
+TwinNU's Advantage (AI Twin, Twiniverses, Rapport Visualization).
+Feature Cards (3x) using the Frosted Glass component, on-scroll reveal animation.
+The Team
+Research-Backed Credibility (Co-founders, Professor).
+Team Avatars (Twin style), short bio text.
+Timeline / Next Steps
+3-Step Growth Trajectory (Northeastern Pilot to National Expansion).
+Numbered list layout, followed by the Institutional Plan Block (placeholder state).
+Footer / Contact
+Legal/Nav links, and the B2B lead generation Institutional CTA.
+Institutional CTA Button, Dark/Light Mode Toggle.
+
+II. Key Layout & Aesthetic Principles
+
+The layout strictly adheres to the TwinNU design principles, ensuring a premium, focused user experience.
+Minimalism & Focus: Extensive use of whitespace/darkspace. Content blocks are centered and concise. The Frosted Glass effect is reserved only for overlay elements (Navbar, Modals) to maintain a clean background view.
+Aesthetic Gimmick: Frosted Glass: The bg-black/40 (Dark Mode) or bg-white/70 (Light Mode) transparent background combined with backdrop-filter: blur(12px) creates a subtle, high-end effect on the Fixed Navbar and Feature Cards.
+Aesthetic Gimmick: Neon Accent: The Neon Accent color (#00FFFF) provides the primary visual pop. It is exclusively used for the H1 Headline and the Primary CTA Button ("Join the Pilot") to enforce a clear Information Hierarchy.
+Animation Pace: All animations (Framer Motion scroll reveals, text glides) are intentionally slow (300-500ms duration) to reinforce the "Slow Social" brand concept.
+III. Reusable Component Usage
+
+Component reusability is managed using class-variance-authority (cva) and Shadcn/ui primitives to ensure a consistent look and easy state management (e.g., 'coming soon').
+Component Name
+Base Element
+Reusable Purpose
+State/Layout Note
+Frosted Navbar
+Layout (Header.tsx)
+Fixed navigation to all main sections.
+Must be transparent and use the Frosted Glass Effect. Includes the Dark/Light Mode Toggle.
+Feature Card
+UI (/components/ui/Card.tsx)
+Displays the three main solutions.
+Uses the Frosted Glass visual style and features a Framer Motion: On-Scroll Reveal animation.
+Primary CTA Button
+UI (/components/ui/Button.tsx)
+Main user conversion point.
+Uses the Neon Accent color and a distinct "primary" variant. Used in the Hero and potentially Footer.
+Institutional Placeholder Block
+Section (B2BPlan.tsx)
+Manages pre-launch expectations.
+The entire block uses low-opacity (opacity-30) desaturated colors to signify a "COMING SOON" state without removing it from the layout.
+
+

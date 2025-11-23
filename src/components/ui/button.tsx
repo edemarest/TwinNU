@@ -6,14 +6,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded-full font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] disabled:cursor-not-allowed disabled:opacity-60",
+  "relative inline-flex items-center justify-center rounded-full font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)] disabled:cursor-not-allowed disabled:opacity-60 hover:-translate-y-0.5 active:translate-y-0",
   {
     variants: {
       variant: {
         primary:
-          "bg-white/85 text-[#111322] shadow-[0_10px_40px_rgba(0,0,0,0.15)] hover:bg-white active:translate-y-0.5 dark:text-[#040714] dark:bg-white/90 dark:hover:bg-white",
+          "bg-gradient-to-br from-white to-white/85 text-[#0c111f] shadow-[0_10px_24px_rgba(0,0,0,0.2)] hover:shadow-[0_14px_28px_rgba(82,124,242,0.25)] dark:from-white/95 dark:to-white/80",
         secondary:
-          "border border-white/15 bg-transparent text-soft hover:border-[var(--tone-orange)]",
+          "border border-white/35 bg-white/5 text-foreground backdrop-blur-lg hover:border-white/70 hover:bg-white/15 dark:border-white/25 dark:text-white/85 dark:hover:text-white",
         ghost: "text-muted hover:text-foreground",
         placeholder:
           "border border-white/10 bg-surface-soft/60 text-muted backdrop-blur-md",

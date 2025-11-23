@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { PiWarningCircleFill } from "react-icons/pi";
+import { PiBroadcastFill, PiHandshakeFill, PiUsersThreeFill } from "react-icons/pi";
 import { problemPoints } from "@/lib/content";
 import { fadeInUp } from "@/lib/animation";
 import { FrostedCard } from "@/components/ui/frosted-card";
@@ -15,16 +16,25 @@ export function ProblemSection() {
       </div>
 
       <div className="mt-10 grid gap-6 md:grid-cols-2">
-        {problemPoints.map((point, index) => (
-          <motion.div key={point} {...fadeInUp(index * 0.08)}>
-            <FrostedCard className="flex h-full items-start gap-4 bg-surface-soft p-6">
-              <div className="rounded-2xl bg-gradient-to-br from-[var(--color-accent)]/30 to-transparent p-3 text-accent shadow-glow">
-                <PiWarningCircleFill className="h-6 w-6" />
-              </div>
-              <p className="text-base text-muted">{point}</p>
-            </FrostedCard>
-          </motion.div>
-        ))}
+        {problemPoints.map((point, index) => {
+          const icons = [
+            PiWarningCircleFill,
+            PiBroadcastFill,
+            PiUsersThreeFill,
+            PiHandshakeFill,
+          ];
+          const Icon = icons[index % icons.length];
+          return (
+            <motion.div key={point} {...fadeInUp(index * 0.08)}>
+              <FrostedCard className="flex h-full items-start gap-4 bg-surface-soft p-6">
+                <div className="flex h-14 w-14 min-h-14 min-w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--color-accent)]/25 to-transparent text-accent">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <p className="text-base text-muted">{point}</p>
+              </FrostedCard>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

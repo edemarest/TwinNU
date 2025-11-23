@@ -1,0 +1,61 @@
+TwinNU Website Visual & Interaction Guide (The "Style")
+
+This guide details the design language, aesthetic rules, and animation specifications for the TwinNU website. It ensures consistency, scalability, and adherence to the cutting-edge, minimalist startup vibe.I. Design Principles: The TwinNU Aesthetic
+
+All design decisions must follow these core principles to maintain the brand's unique "slow social" identity.
+Minimalism & Focus: Elements are sparse. Whitespace (or darkspace) is premium. Only use the Frosted Glass effect for fixed/overlay elements (Nav, Modals) to maintain a clean aesthetic.
+Smoothness & Pace: All interactive animations (scroll reveals, state changes) must be fluid and subtle, never jarring. Animation speed should be deliberately slow (e.g., 300-500ms ease) to reinforce the "Slow Social" concept.
+Dual Mode Integrity: The website must be visually stunning in both Dark and Light modes. Colors, shadows, and opacity must be carefully configured to ensure the "Frosted Glass" and "Glow" effects translate seamlessly.
+Information Hierarchy: The vibrant Neon Accent color is reserved exclusively for the most critical elements: Primary CTAs ("Join the Pilot") and the H1 headline.
+II. Theme & Styling Rules
+Element / Variable
+Dark Mode (Primary)
+Light Mode (Aesthetic Toggle)
+Styling / Code Tip
+Background (Global)
+Deep Charcoal (`#121212`) or Dark Navy (`#0A0A10`).
+Soft White (`#FAFAFA`) or Pale Grey (`#F4F4F5`).
+Define via CSS variables in `globals.css` and reference in Tailwind config to allow `next-themes` to switch them.
+Primary Accent (Glow/CTA)
+Neon Blue, Bright Cyan, or Electric Green (`#00FFFF`).
+Muted/Pastel version of the neon.
+Use a Tailwind custom color utility (e.g., `text-neon-500`) for easy switching and consistent application.
+Frosted Glass Effect
+Dark transparent layer (`bg-black/40`) with a heavy blur.
+Light transparent layer (`bg-white/70`) with a heavy blur.
+CSS: Apply `backdrop-filter: blur(12px);` to the semi-transparent background on the fixed Navbar and Modals. Use NO box-shadow to keep it clean; the effect comes from the background blur itself.
+Typography (Font Stack)
+Clean, modern Sans-Serif (e.g., Inter, Poppins).
+Same as Dark Mode.
+H1-H3: Bold weight to stand out on the dark background. Body: Regular weight for maximum legibility. Utilize a modern font from Google Fonts or local assets.
+Separator/Divider
+Thin, low-opacity Neon Accent line.
+Thin, low-opacity Dark Accent line.
+Use `border-t-1 border-neon-500/20` (Tailwind utility) for a subtle separation between main sections, aligning with the "glowing band" concept.
+
+III. Core Component Deep Dive & Interaction
+Component
+Visual Requirement
+Animation/Interaction Specification (Framer Motion)
+Hero Background
+2D Seamless Moving Galaxy Tile & Pulsing Orbits.
+Layer 1 (Galaxy): CSS `@keyframes` animation on `background-position` set to a minimum of 60 seconds for a slow diagonal shift. Layer 2 (Orbits): CSS `@keyframes` animation on `box-shadow` opacity/blur radius to create the slow, pulsing glow of the colored bands. Speed: ~2.5s loop.
+Hero Text/CTA
+H1 in Neon, sub-text in light color, centered.
+Framer Motion: All text and the primary CTA should glide in on page load. `initial={{y: 20, opacity: 0}}` to `animate={{y: 0, opacity: 1}}`. Use a staggered delay to maintain the "slow social" feel.
+Frosted Navbar
+Fixed at the top, full width, containing anchors and theme toggle.
+Interaction: Smooth scroll to section when an anchor is clicked (use `react-scroll`).
+Feature Cards (3x)
+Uses the Frosted Glass component, presenting solutions.
+Framer Motion: On-Scroll Reveal. Cards should start out of view and glide in as the user scrolls to them. Use `whileInView` prop with `initial={{y: 50, opacity: 0}}` and `animate={{y: 0, opacity: 1}}`.
+Institutional Plan Block
+Greyed-out, low-opacity, professional table layout.
+Visual State: Entire block uses desaturated colors and a low overall opacity (e.g., `opacity-30`) to signify the "COMING SOON" placeholder status without being hidden. Use a button that is still clickable but clearly labeled "Contact for Institutional License."
+
+IV. AI & Adaptability Tips
+Custom Component Naming: All reusable components must be highly descriptive (e.g., `HeroAnimatedBackground`, `FrostedCard`, `PulsingOrbit`).
+Animation Variable Management: Define all animation durations and delays in a shared `animation.ts` file within the `/lib` directory. This allows for single-point adjustments to the "slow social" pace without searching through component files.
+Example: `export const SLOW_DURATION = 0.5;`
+Dynamic Content: Use placeholders and variables for all pricing/metrics copy. The AI should be able to update these strings easily in Document 1 without touching the presentation logic in the code.
+Layout Flexiblity: Use Tailwind's Flexbox and Grid utilities extensively in the main section containers. This ensures the component order can be quickly re-arranged based on future user testing or marketing needs.

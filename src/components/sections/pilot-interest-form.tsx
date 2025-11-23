@@ -2,33 +2,20 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMail, FiUsers, FiCompass, FiMessageCircle, FiUser } from "react-icons/fi";
-import { PiSparkleFill } from "react-icons/pi";
+import { FiMail, FiMessageCircle, FiUser } from "react-icons/fi";
+import { PiSparkleFill, PiPaperPlaneRightFill } from "react-icons/pi";
 import { Button } from "@/components/ui/button";
 
 const fields = [
+  { id: "name", label: "Full name", required: true, icon: FiUser, placeholder: "First Last" },
   { id: "email", label: "Email", required: true, icon: FiMail, type: "email", placeholder: "you@university.edu" },
   {
-    id: "affiliation",
-    label: "Affiliation (program, grad year, orgs)",
-    icon: FiUsers,
-    placeholder: "Example: Northeastern CS · 2026 · HuskyAI",
-  },
-  {
-    id: "interests",
-    label: "People / events you'd like to encounter",
-    icon: FiCompass,
-    textarea: true,
-    placeholder: "Which communities or experiences excite you?",
-  },
-  {
-    id: "comments",
-    label: "Thoughts or comments",
+    id: "communityIntent",
+    label: "Community + intent",
     icon: FiMessageCircle,
     textarea: true,
-    placeholder: "Anything you'd like us to know",
+    placeholder: "Share your affiliation and what you hope to unlock with twinNU.",
   },
-  { id: "name", label: "Your name", icon: FiUser, placeholder: "Your name" },
 ];
 
 const successVariants = {
@@ -63,7 +50,7 @@ export function PilotInterestForm() {
   };
 
   return (
-    <div className="mt-12">
+    <div className="mt-8">
       <AnimatePresence mode="wait">
         {submitted ? (
           <motion.div
@@ -75,9 +62,9 @@ export function PilotInterestForm() {
             variants={successVariants}
           >
             <PiSparkleFill className="mx-auto mb-3 h-8 w-8 text-secondary" />
-            <h3 className="text-2xl font-semibold">You&apos;re on the Twiniverse pilot radar!</h3>
+            <h3 className="text-2xl font-semibold">You&apos;re on the twinNU interest list.</h3>
             <p className="mt-3 text-soft">
-              We&apos;ll follow up when a slot is available for your community. Keep an eye on your inbox.
+              Expect a personal note when your community matches the next slow-social cohort—we&apos;ll share rollout timing before anyone else.
             </p>
           </motion.div>
         ) : (
@@ -87,7 +74,7 @@ export function PilotInterestForm() {
             method="POST"
             data-netlify="true"
             data-netlify-honeypot="bot-field"
-            className="glass-panel rounded-3xl p-8"
+            className="glass-panel rounded-3xl p-7 sm:p-8"
             onSubmit={handleSubmit}
             initial="hidden"
             animate="visible"
@@ -115,6 +102,7 @@ export function PilotInterestForm() {
                         name={field.id}
                         rows={3}
                         placeholder={field.placeholder}
+                        required={field.required}
                         className="mt-2 w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-soft shadow-inner shadow-black/5 focus:border-white/40 focus:outline-none"
                       />
                     ) : (
@@ -132,15 +120,22 @@ export function PilotInterestForm() {
             </div>
 
             <div className="mt-8 flex flex-col gap-3 text-left">
-              <p className="text-xs uppercase tracking-[0.35em] text-soft">Pilot priorities</p>
+              <p className="text-xs uppercase tracking-[0.35em] text-soft">What happens next</p>
               <p className="text-sm text-muted">
-                We are focusing on student research communities. Tell us why your group should go slow social first.
+                We review submissions weekly and invite aligned communities when a pilot slot unlocks.
               </p>
             </div>
 
-            <div className="mt-8 flex justify-end">
-              <Button type="submit" disabled={submitting}>
-                {submitting ? "Submitting..." : "Submit Interest"}
+            <div className="mt-6 flex justify-end">
+              <Button
+                type="submit"
+                disabled={submitting}
+                className="px-6 bg-white/90 text-[#050a13] shadow-[0_8px_18px_rgba(0,0,0,0.12)] hover:bg-white hover:shadow-[0_12px_22px_rgba(0,0,0,0.18)]"
+              >
+                <span className="flex items-center gap-2">
+                  <PiPaperPlaneRightFill className="h-4 w-4" />
+                  {submitting ? "Submitting..." : "Submit"}
+                </span>
               </Button>
             </div>
           </motion.form>

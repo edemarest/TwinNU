@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TwinNU | Slow Social Twiniverse",
+  title: "twinNU | Slow Social Twiniverse",
   description:
-    "The TwinNU Twiniverse builds meaningful, low-noise connections through slow social digital twins.",
+    "Join the twinNU waitlist to experience slow-social pilots powered by digital twins and curated Twiniverses.",
 };
 
 export default function RootLayout({

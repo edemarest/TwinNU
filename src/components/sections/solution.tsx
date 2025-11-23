@@ -17,7 +17,7 @@ export function SolutionSection() {
     <section id="solution" className="section">
       <div className="section-heading">
         <span>Solution</span>
-        <h2>TwinNU: The Twiniverse Advantage.</h2>
+        <h2>twin<strong>NU</strong>: The Twiniverse Advantage.</h2>
       </div>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3">

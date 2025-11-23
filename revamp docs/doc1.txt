@@ -1,0 +1,246 @@
+TwinNU Website Content & Component Map
+
+This document outlines all required text, visual assets, and component states for the cutting-edge, minimalist TwinNU pre-launch website. It serves as the single source of truth for on-page content.I. Core Messaging
+
+This copy should be prominent, using the primary neon accent color for the H1 in Dark Mode.
+H1 Headline: The Future of Meaningful Connections is Slow Social.
+Sub-Headline: Your digital twin is building the network you deserve. Without the noise.
+II. Section CopyThe Problem
+
+H2: Networking is Broken.
+Content Summary: Concise statements highlighting the pain points:
+The "Missing Middle" of ties—where real opportunity lives but is never formed.
+Connection Fatigue from endless feeds and manual outreach.
+High Effort, Low Reward from traditional networking events.
+Need for verified, low-risk introductions in closed communities.
+Solution & Features
+
+H2: TwinNU: The Twiniverse Advantage.
+Content Summary: Three short, punchy statements corresponding to the three feature cards:
+AI Digital Twin: Your agent handles weekly, low-pressure, context-aware encounters in the background.
+Closed Twiniverses: Verified, private networks aligned to your university or company for maximum trust and safety.
+Rapport Visualization: Track and measure the strength of your connections (your Circle) without manual effort.
+The Team
+
+H2: Research-Backed. Student-Driven.
+Content Summary: Short, confident statements on key team members:
+Matej Zecic (Co-founder): Full-stack software engineer (mobile focus); Masters from Northeastern.
+Ella Demarest (Co-founder): UI/UX/Engine lead; BS from Northeastern; specializes in game loop and data ingestion strategies.
+Professor Kevin Boudreau (Co-founder): Originator of the core concept; provides research-backed credibility and institutional ties.
+Timeline / Next Steps
+
+H2: The Growth Trajectory.
+3-Step Plan (Timeline Copy):
+Flagship Proof: Prove value in one community: Launch the large-scale pilot at Northeastern University.
+Local Cluster Replication: Convert nearby pilots (BU, MIT, Harvard) using proven metrics and on-campus presence.
+National Expansion: Scale nationally using the templated, configurable Twiniverse package—no rebuilds, just configuration.
+III. Component Map (Reusable Elements & Navigation)
+Component Type
+Element Name
+Purpose
+Notes
+ Navigation
+Navigation Anchors
+Fixed top-bar links.
+Problem, Vision, Team, Plan, Contact.
+ Navigation
+Dark/Light Mode Toggle
+Aesthetic control.
+Simple, prominent toggle.
+ Call-to-Action
+Primary CTA Button
+Sign-up / Interest.
+Copy: "Join the Pilot" (Links to a waitlist form).
+ Call-to-Action
+Institutional CTA
+B2B lead generation.
+Copy: "Request a Demo/Pilot" (Links to a contact form).
+ Visual Element
+Digital Twin Icon
+App's central symbol.
+Animated, cartoon-ified icon used in the Hero section and Features.
+ Visual Element
+Feature Cards (3x)
+Solution/Feature highlights.
+Reusable component using the Frosted Glass aesthetic.
+
+IV. Visual Assets
+Asset Name
+Requirement
+Usage/Location
+Notes
+Galaxy Tile
+Seamless, high-res 2D image.
+Background for the Hero section (Layer 1).
+Used with CSS for slow, repeatable movement.
+Orbit Graphics
+Custom graphic/CSS shapes.
+Layer 2 of Hero, creating glowing/pulsing bands.
+Must be easily colorable with CSS for the multi-colored effect.
+Team Avatars
+Cartoon-ified/Abstract.
+The Team section.
+Use the "Twin" style for visual consistency.
+Feature Icons
+Abstract, minimalist icons.
+Solution/Features section.
+Icon set for: AI/Twin, Verification/Safety, Rapport/Circle.
+
+V. Placeholder / Coming Soon Elements
+
+These elements are visually distinct (greyed-out, low-opacity, or unclickable) to maintain a professional aesthetic while managing pre-launch expectations.
+Element
+Copy/State
+Visual Implementation
+App Download Buttons
+"Currently in Closed Pilot at Northeastern University."
+App Store / Google Play icons are greyed out and unclickable.
+Institutional Pricing (Twiniverse Package Plan)
+"Enterprise Pricing: Currently in Pilot Negotiation."
+The entire element is desaturated and low-opacity (greyed out).
+In-App Monetization
+(Removed as requested)
+N/A
+Traction Metrics
+No specific numbers.
+General, confidence-boosting text: "Generating Early Insights in the Northeastern Community."
+
+
+
+
+TwinNU Website Technical Setup & Architecture
+
+This document outlines the core technical decisions, required dependencies, and project structure necessary for a seamless and scalable development of the TwinNU website using modern React best practices.I. Tech Stack Summary
+
+The website will be built on a high-performance, cutting-edge stack to ensure speed, scalability, and an excellent developer experience.
+Area
+Technology / Choice
+Rationale
+Framework
+Next.js 14+ (App Router)
+Enables superior performance, SEO optimization via SSR/SSG, and provides a modern routing and data-fetching layer.
+Language
+TypeScript
+Essential for maintaining a scalable, error-free codebase and improving developer productivity across the team.
+Styling
+Tailwind CSS (Utility-First)
+Allows for rapid, precise, and custom styling that perfectly achieves the minimalist, aesthetic feel without heavy CSS-in-JS libraries.
+Components
+Shadcn/ui (Built on Radix UI)
+Provides fully functional, accessible, and unstyled primitives that can be customized with Tailwind, ensuring component reusability and maximum control over the final aesthetic.
+Animation
+Framer Motion
+The declarative standard for complex, smooth, and performant animations (e.g., text glide-in, on-scroll feature reveals).
+Theming
+`next-themes`
+Simple, effective solution for implementing the dark/light mode toggle with theme persistence.
+
+II. Dependencies (package.json)
+
+Install all necessary packages to implement the planned features and visual effects.
+Category
+Package Name(s)
+Purpose
+Core
+```
+react
+```, ```
+react-dom
+```, ```
+next
+```, ```
+typescript
+```
+Standard React/Next.js stack.
+Styling/Tailwind
+```
+tailwindcss
+```, ```
+postcss
+```, ```
+autoprefixer
+```
+Required for Tailwind CSS setup.
+UI/Utilities
+```
+clsx
+```, ```
+tailwind-merge
+```, ```
+class-variance-authority
+``` (```
+cva
+```)
+Essential for creating reusable, conditional components (Shadcn/ui's core pattern).
+Animations/Effects
+```
+framer-motion
+```
+Implementing the smooth glides, fades, and subtle orbit/pulsing effects.
+Aesthetics/Flow
+```
+next-themes
+```, ```
+react-scroll
+```
+Dark/Light mode toggle and smooth scrolling for fixed navigation anchors.
+Development (DevDeps)
+```
+@types/react
+```, ```
+@types/node
+```, ```
+eslint
+```, ```
+prettier
+```
+Standard developer dependencies for linting and formatting.
+
+III. Project Structure
+
+The project will follow the Next.js App Router convention for a clean and scalable structure.
+Folder / File Name
+Purpose
+Notes
+`/app`
+Root of the application and page routing.
+`page.tsx`: The single-page marketing site/homepage.
+`/components/ui`
+Low-level, reusable UI components (Buttons, Cards, Modals, etc.).
+Location for all Shadcn/ui components and primitives.
+`/components/layout`
+Components defining the structure of the page.
+`Header.tsx` (Frosted Nav), `Footer.tsx`, `ThemeProvider.tsx`.
+`/components/sections`
+Large, unique sections of the single page.
+`Hero.tsx` (Galaxy Animation), `Problem.tsx`, `Timeline.tsx`, `B2BPlan.tsx`.
+`/public`
+Static assets.
+Location for Galaxy Tile image, Twin Icon, and Avatars.
+`/styles`
+Global styles and Tailwind configuration.
+`globals.css` (Tailwind imports, custom CSS variables for blur/glow).
+`/lib`
+Utility functions and design-related constants.
+Theme configuration, animation constants, and any helper hooks.
+
+IV. Local Development Setup
+
+Follow these steps to get the project running and testing locally:
+Clone the Repository: Download the project files.
+Install Dependencies: Run the package manager install command:
+npm install
+# OR
+yarn install
+Run Development Server: Start the local server to view the site at http://localhost:3000.
+npm run dev
+# OR
+yarn dev
+Testing: For component-level testing, ensure Jest and React Testing Library are configured to verify component functionality and accessibility before merging code.
+V. Component Reusability & State
+
+To ensure the website is easy to adapt and scale (e.g., adding a new feature card or updating the Twiniverse package plan), we rely heavily on the following pattern:
+Reusability with cva: Use the `class-variance-authority` (`cva`) package to define component appearance variants.
+Example: A single <Button> component can accept a variant="primary" (Neon Accent), variant="secondary" (Ghost/White), and variant="placeholder" (Greyed Out) prop, making the "COMING SOON" elements simple to manage.
+Consistency with Shadcn/ui: All basic UI elements (Cards, Dialogs, etc.) should originate from a Shadcn/ui blueprint to guarantee accessibility and a consistent base structure, with Tailwind customizing the final look (e.g., adding the Frosted Glass effect).
+Theme Integration: All color utilities must reference the Tailwind config, which is dynamically controlled by `next-themes` and the global theme state. This ensures that the Frosted Glass element's blur color shifts correctly when the user toggles modes.
