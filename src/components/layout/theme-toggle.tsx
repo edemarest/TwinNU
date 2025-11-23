@@ -31,7 +31,7 @@ export function ThemeToggle() {
         setTheme(isDark ? "light" : "dark");
       }}
       className={cn(
-        "flex h-8 w-8 items-center justify-center rounded-full border bg-white/90 text-[#0f111a] transition shadow-[0_3px_10px_rgba(0,0,0,0.15)] dark:bg-black/40 dark:text-white/80 dark:border-white/15",
+        "flex h-8 w-8 items-center justify-center rounded-full border bg-white/90 text-[#0f111a] transition shadow-[0_3px_10px_rgba(0,0,0,0.15)] dark:bg-black/40 dark:text-white/80 dark:border-white/15 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/40 dark:focus-visible:ring-white/50",
         "hover:scale-105"
       )}
     >

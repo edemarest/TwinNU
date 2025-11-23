@@ -32,8 +32,10 @@ export function SiteFooter() {
           {navItems.map((item) => (
             <button
               key={item.id}
-              className="transition-colors hover:text-foreground"
+              type="button"
+              className="cursor-pointer transition-colors hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)] rounded-full px-2 py-1"
               onClick={() => scrollTo(item.id)}
+              aria-label={`Scroll to ${item.label} section`}
             >
               {item.label}
             </button>

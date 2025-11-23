@@ -25,8 +25,9 @@ export function SiteHeader() {
       <div className="mx-auto max-w-6xl px-4 pt-4 sm:px-6 lg:px-8">
         <div className="glass-panel header-glass flex items-center justify-between gap-4 rounded-full px-6 py-3">
           <button
-            className="text-sm font-medium text-foreground"
+            className="logo-button text-sm font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 dark:focus-visible:ring-white/40"
             onClick={() => scrollTo("hero")}
+            type="button"
           >
             <span className="flex items-center gap-3">
               <span className="flex h-10 w-10 overflow-hidden items-center justify-center rounded-2xl border border-white/15 bg-white/90 shadow-[0_6px_18px_rgba(0,0,0,0.15)] dark:bg-white">

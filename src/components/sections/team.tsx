@@ -40,7 +40,7 @@ export function TeamSection() {
                         href={member.linkedin}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-muted transition-colors hover:text-foreground"
+                        className="text-muted transition-colors hover:text-foreground cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-background)] rounded-full"
                         aria-label={`${member.name} on LinkedIn`}
                       >
                         <PiLinkedinLogoFill className="h-4 w-4" />

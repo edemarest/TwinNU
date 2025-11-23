@@ -1,4 +1,4 @@
-import { type ReactNode } from "react";
+import { memo, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type FrostedCardProps = {
@@ -6,7 +6,7 @@ type FrostedCardProps = {
   className?: string;
 };
 
-export function FrostedCard({ children, className }: FrostedCardProps) {
+function FrostedCardComponent({ children, className }: FrostedCardProps) {
   return (
     <div
       className={cn(
@@ -18,3 +18,6 @@ export function FrostedCard({ children, className }: FrostedCardProps) {
     </div>
   );
 }
+
+export const FrostedCard = memo(FrostedCardComponent);
+FrostedCard.displayName = "FrostedCard";

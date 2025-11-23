@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 
 type OrbitLayer = {
@@ -21,11 +21,125 @@ type OrbitSystemProps = {
 
 export function OrbitSystem({ layers, centerContent }: OrbitSystemProps) {
   const [hoveredLayer, setHoveredLayer] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [mobileScale, setMobileScale] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+  const observerRef = useRef<ResizeObserver | null>(null);
+  const lastWidthRef = useRef(0);
+  const enterTimeoutRef = useRef<number | null>(null);
+  const releaseTimeoutRef = useRef<number | null>(null);
+  const baseDiameter = Math.max(...layers.map((layer) => layer.outerRadius * 2));
+  const FREEZE_DELAY = 90;
+  const RELEASE_DELAY = 180;
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !("matchMedia" in window)) {
+      return;
+    }
+    const media = window.matchMedia("(max-width: 640px)");
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) {
+      lastWidthRef.current = 0;
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+        observerRef.current = null;
+      }
+      return;
+    }
+
+    if (typeof window === "undefined" || !("ResizeObserver" in window)) {
+      return;
+    }
+
+    const element = containerRef.current;
+    if (!element) return;
+
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      const { width } = entry.contentRect;
+      if (!width || width === lastWidthRef.current) return;
+      lastWidthRef.current = width;
+      const nextScale = Math.min(width / baseDiameter, 1);
+      setMobileScale(nextScale || 1);
+    });
+
+    observerRef.current = observer;
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      if (observerRef.current === observer) {
+        observerRef.current = null;
+      }
+    };
+  }, [baseDiameter, isMobile]);
+
+  useEffect(() => {
+    return () => {
+      if (enterTimeoutRef.current) {
+        window.clearTimeout(enterTimeoutRef.current);
+      }
+      if (releaseTimeoutRef.current) {
+        window.clearTimeout(releaseTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const handleLayerEnter = (layerIndex: number) => {
+    if (hoveredLayer === layerIndex) return;
+    if (releaseTimeoutRef.current) {
+      window.clearTimeout(releaseTimeoutRef.current);
+      releaseTimeoutRef.current = null;
+    }
+    if (enterTimeoutRef.current) {
+      window.clearTimeout(enterTimeoutRef.current);
+      enterTimeoutRef.current = null;
+    }
+
+    if (hoveredLayer !== null) {
+      setHoveredLayer(layerIndex);
+      return;
+    }
+
+    enterTimeoutRef.current = window.setTimeout(() => {
+      setHoveredLayer(layerIndex);
+      enterTimeoutRef.current = null;
+    }, FREEZE_DELAY);
+  };
+
+  const handleLayerLeave = () => {
+    if (enterTimeoutRef.current) {
+      window.clearTimeout(enterTimeoutRef.current);
+      enterTimeoutRef.current = null;
+    }
+    if (releaseTimeoutRef.current) {
+      window.clearTimeout(releaseTimeoutRef.current);
+      releaseTimeoutRef.current = null;
+    }
+    releaseTimeoutRef.current = window.setTimeout(() => {
+      setHoveredLayer(null);
+      releaseTimeoutRef.current = null;
+    }, RELEASE_DELAY);
+  };
+
+  const renderScale = isMobile ? mobileScale : 1;
 
   return (
-    <div className="relative flex aspect-square w-full max-w-[720px] items-center justify-center">
+    <div
+      ref={containerRef}
+      className="relative flex aspect-square w-full max-w-[720px] items-center justify-center"
+    >
       {centerContent ? (
-        <div className="relative z-20 flex items-center justify-center">
+        <div
+          className="relative z-20 flex items-center justify-center"
+          style={{ transform: `scale(${renderScale})` }}
+        >
           {centerContent}
         </div>
       ) : null}
@@ -39,6 +153,9 @@ export function OrbitSystem({ layers, centerContent }: OrbitSystemProps) {
         const spinClass =
           layer.speed && layer.speed < 0 ? "orbit-spin-reverse" : "orbit-spin";
         const shouldPause = hoveredLayer !== null;
+        const scaledInnerRadius = layer.innerRadius * renderScale;
+        const scaledOuterRadius = layer.outerRadius * renderScale;
+        const bandWidth = scaledOuterRadius - scaledInnerRadius;
 
         return (
           <div
@@ -49,9 +166,9 @@ export function OrbitSystem({ layers, centerContent }: OrbitSystemProps) {
             <div
               className="pointer-events-none absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{
-                width: layer.outerRadius * 2,
-                height: layer.outerRadius * 2,
-                borderWidth: layer.outerRadius - layer.innerRadius,
+                width: scaledOuterRadius * 2,
+                height: scaledOuterRadius * 2,
+                borderWidth: bandWidth,
                 borderStyle: "solid",
                 borderColor: layer.bandColor ?? "rgba(255,255,255,0.25)",
               }}
@@ -63,34 +180,32 @@ export function OrbitSystem({ layers, centerContent }: OrbitSystemProps) {
                 animationDuration: `${duration}s`,
                 animationPlayState: shouldPause ? "paused" : "running",
               }}
-              onMouseEnter={() => setHoveredLayer(layerIndex)}
-              onMouseLeave={() => setHoveredLayer(null)}
+              onMouseEnter={() => handleLayerEnter(layerIndex)}
+              onMouseLeave={handleLayerLeave}
             >
               {layer.avatars.map((avatar, index) => {
-                const size = layer.avatarSize ?? 40;
+                const size = (layer.avatarSize ?? 40) * renderScale;
                 const angle = angleStep * index;
                 const rad = (angle * Math.PI) / 180;
                 const midRadius =
-                  layer.innerRadius +
-                  (layer.outerRadius - layer.innerRadius) / 2;
+                  scaledInnerRadius +
+                  (scaledOuterRadius - scaledInnerRadius) / 2;
                 const radiusOffset = midRadius;
                 const tangentX = -Math.sin(rad);
                 const tangentY = Math.cos(rad);
-                const jitter = shouldPause ? 18 : 0;
+                const jitter = shouldPause ? 18 * renderScale : 0;
                 const x = radiusOffset * Math.cos(rad) + tangentX * jitter;
                 const y = radiusOffset * Math.sin(rad) + tangentY * jitter;
+                const freezeDuration = shouldPause ? 420 : 260;
                 return (
                   <div
                     key={`${avatar.src}-${index}`}
-                    className={`absolute z-30 transition-transform ${
-                      shouldPause
-                        ? "duration-300 ease-[cubic-bezier(0.2,1.4,0.4,1)]"
-                        : "duration-500 ease-out"
-                    }`}
+                    className="absolute z-30 will-change-transform"
                     style={{
                       left: "50%",
                       top: "50%",
                       transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+                      transition: `transform ${freezeDuration}ms cubic-bezier(0.2, 0.95, 0.35, 1)`,
                     }}
                   >
                     <div

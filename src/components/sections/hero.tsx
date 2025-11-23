@@ -77,13 +77,13 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative isolate flex min-h-[100vh] flex-col items-center justify-center px-6 pb-22 pt-30 text-center"
+      className="hero-section relative isolate flex min-h-[100vh] flex-col items-center justify-center px-6 pb-22 pt-30 text-center"
     >
       <div className="hero-galaxy" />
       <div className="hero-dim" />
       <div className="hero-aurora" />
 
-      <div className="grid w-full max-w-6xl items-center gap-10 lg:grid-cols-2">
+      <div className="grid w-full max-w-6xl items-center gap-10 lg:grid-cols-2 mx-auto">
         <div className="flex w-full max-w-3xl flex-col items-center text-center lg:max-w-[540px] lg:items-start lg:text-left">
           <motion.h1
             className="max-w-4xl text-balance text-4xl font-semibold leading-tight text-inverted sm:text-5xl lg:text-6xl"
@@ -147,7 +147,7 @@ export function HeroSection() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-          className="flex justify-center overflow-visible"
+          className="hero-orbit-wrapper flex justify-center overflow-visible cursor-pointer"
         >
           <OrbitSystem
             layers={orbitLayers}
