@@ -22,7 +22,7 @@ export function SiteHeader() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-40">
-      <div className="mx-auto max-w-6xl px-4 pt-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl px-4 pt-4 sm:px-6 lg:px-8">
         <div className="glass-panel header-glass flex items-center justify-between gap-4 rounded-full px-6 py-3">
           <button
             className="logo-button text-sm font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/30 dark:focus-visible:ring-white/40"
