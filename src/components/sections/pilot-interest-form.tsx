@@ -26,24 +26,48 @@ const successVariants = {
 export function PilotInterestForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (submitting) return;
     setSubmitting(true);
+    setErrorMessage(null);
 
     const form = event.currentTarget;
     const data = new FormData(form);
+    const payload = {
+      name: data.get("name")?.toString().trim() ?? "",
+      email: data.get("email")?.toString().trim() ?? "",
+      communityIntent: data.get("communityIntent")?.toString().trim() ?? "",
+      botField: data.get("bot-field")?.toString().trim() ?? "",
+    };
+
+    if (payload.botField) {
+      form.reset();
+      setSubmitting(false);
+      return;
+    }
 
     try {
-      await fetch("/", {
+      const response = await fetch("/api/forms/pilot-interest", {
         method: "POST",
-        body: data,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       });
+
+      if (!response.ok) {
+        throw new Error(`Netlify submission failed: ${response.status}`);
+      }
+
       setSubmitted(true);
     } catch (error) {
       console.error(error);
-      alert("There was a problem submitting your application. Please email us.");
+      setErrorMessage(
+        "There was a problem submitting your application. Please retry or email us."
+      );
     } finally {
       setSubmitting(false);
     }
@@ -71,16 +95,12 @@ export function PilotInterestForm() {
           <motion.form
             key="form"
             name="pilot-interest"
-            method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
             className="glass-panel rounded-3xl p-7 sm:p-8"
             onSubmit={handleSubmit}
             initial="hidden"
             animate="visible"
             variants={successVariants}
           >
-            <input type="hidden" name="form-name" value="pilot-interest" />
             <p className="hidden">
               <label>
                 Don&apos;t fill this out: <input name="bot-field" />
@@ -138,6 +158,9 @@ export function PilotInterestForm() {
                 </span>
               </Button>
             </div>
+            {errorMessage ? (
+              <p className="mt-4 text-sm text-red-300">{errorMessage}</p>
+            ) : null}
           </motion.form>
         )}
       </AnimatePresence>
