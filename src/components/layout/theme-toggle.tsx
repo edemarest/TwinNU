@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { PiMoonStarsFill, PiSunFill } from "react-icons/pi";
 import { cn } from "@/lib/utils";
+import { startThemeTransition } from "@/components/layout/theme-transition";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -25,7 +26,10 @@ export function ThemeToggle() {
   return (
     <button
       aria-label="Toggle theme"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => {
+        startThemeTransition();
+        setTheme(isDark ? "light" : "dark");
+      }}
       className={cn(
         "flex h-8 w-8 items-center justify-center rounded-full border bg-white/90 text-[#0f111a] transition shadow-[0_3px_10px_rgba(0,0,0,0.15)] dark:bg-black/40 dark:text-white/80 dark:border-white/15",
         "hover:scale-105"

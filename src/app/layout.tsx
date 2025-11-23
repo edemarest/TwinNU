@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/theme-provider";
+import { ThemeTransitionLayer } from "@/components/layout/theme-transition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "twinNU | Slow Social Twiniverse",
+  title: "twinNU | Coming Soon",
   description:
     "Join the twinNU waitlist to experience slow-social pilots powered by digital twins and curated Twiniverses.",
 };
@@ -30,6 +31,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} bg-base text-foreground antialiased`}
       >
         <ThemeProvider>
+          <ThemeTransitionLayer />
           <div className="relative min-h-screen">
             <div className="page-bokeh" />
             <div className="site-frame" />

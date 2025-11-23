@@ -5,6 +5,7 @@
   --tone-blue-soft: #4a9de4;
   --tone-orange: #ffb68a;
   --tone-orange-soft: #f49761;
+  --theme-transition-duration: 0s;
 
   --color-background: #04060b;
   --color-background-alt: #070d15;
@@ -69,6 +70,26 @@ body {
     BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+body,
+body * {
+  transition:
+    background-color var(--theme-transition-duration) ease,
+    color var(--theme-transition-duration) ease,
+    border-color var(--theme-transition-duration) ease,
+    box-shadow var(--theme-transition-duration) ease,
+    fill var(--theme-transition-duration) ease,
+    stroke var(--theme-transition-duration) ease;
+}
+
+html.theme-transition {
+  --theme-transition-duration: 0.65s;
+}
+
+html.theme-transition body,
+html.theme-transition body * {
+  will-change: background-color, color, border-color, fill, stroke, box-shadow;
+}
+
 ::selection {
   background: var(--color-accent);
   color: #050505;
@@ -86,6 +107,35 @@ body {
 .bg-surface {
   background: var(--gradient-blue);
   backdrop-filter: blur(18px);
+}
+
+.theme-change-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 25;
+  opacity: 0;
+  transition: opacity 0.65s ease;
+  mix-blend-mode: screen;
+  background: radial-gradient(circle at 20% 20%, rgba(108, 191, 249, 0.08), transparent 55%),
+    radial-gradient(circle at 80% 0%, rgba(255, 182, 138, 0.08), transparent 60%),
+    rgba(5, 7, 14, 0.25);
+}
+
+html.light .theme-change-overlay {
+  background: radial-gradient(circle at 15% 30%, rgba(82, 124, 242, 0.16), transparent 55%),
+    radial-gradient(circle at 70% 0%, rgba(241, 200, 104, 0.18), transparent 60%),
+    rgba(255, 255, 255, 0.5);
+}
+
+html.dark .theme-change-overlay {
+  background: radial-gradient(circle at 10% 20%, rgba(108, 191, 249, 0.22), transparent 60%),
+    radial-gradient(circle at 85% 0%, rgba(255, 182, 138, 0.2), transparent 60%),
+    rgba(5, 7, 14, 0.45);
+}
+
+html.theme-transition .theme-change-overlay {
+  opacity: 0.7;
 }
 
 .text-foreground {
